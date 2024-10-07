@@ -13,10 +13,12 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container">
+            @if(Auth::user())
                 <a class="navbar-brand" href="{{ URL('/dashboard') }}" wire:navigate>Dashboard</a>
                 <a class="navbar-brand" href="{{ URL('/posts') }}" wire:navigate>Post</a>
                 <a class="navbar-brand" href="{{ URL('/categories') }}" wire:navigate>Category</a>
                 <a class="navbar-brand" href="{{ URL('/products') }}" wire:navigate>Product</a>
+            @endif
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>

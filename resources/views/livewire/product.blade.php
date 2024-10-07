@@ -12,8 +12,7 @@
         @endif
         @if($updateProduct)
             @include('livewire.product.update')
-        {{-- @elseif($addProduct) --}}
-        @else
+        @elseif($addProduct)
             @include('livewire.product.create')
         @endif
     </div>
@@ -21,7 +20,7 @@
         <div class="card">
             <div class="card-body">
                 @if(!$addProduct)
-                    {{-- <button wire:click="addProductData()" class="btn btn-primary btn-sm float-right">Add New Product</button> --}}
+                    <button wire:click="addProductData()" class="btn btn-primary btn-sm float-right">Add New Product</button>
                 @endif
                 <div class="table-responsive">
                     <table class="table">
@@ -70,9 +69,16 @@
 </div>
 @push('scripts')
     <script>
-        document.addEventListener("livewire:load", function() {
+        document.addEventListener('livewire:initialized', () => {
             initializeSelect2();
         });
+
+        Livewire.on('post-created', (event) => {
+             setTimeout(function () {
+                initializeSelect2();
+             },500)
+        });
+        
         function initializeSelect2() {
             // Check if the select2 element exists
             let select2Element = $('#select2');

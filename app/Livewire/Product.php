@@ -29,6 +29,7 @@ class Product extends Component
 
     public function render()
     {
+        $this->dispatch('post-created');
         $this->category = Categories::all();
         $this->products = Products::with('product_images')->get();
         return view('livewire.product');
