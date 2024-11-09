@@ -24,8 +24,8 @@
         <label for="images">Product Images:</label>
         <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" wire:model="images" multiple>
         @error('images.*') <span class="text-danger">{{ $message }}</span>@enderror
-        @if(count($products[0]->product_images) > 0)
-        @foreach($products[0]->product_images as $image)
+        @if(count($product_images) > 0)
+        @foreach($product_images as $image)
             <img src="{{ Storage::url('product_image/' . $image->image) }}" alt="">
         @endforeach
         @endif

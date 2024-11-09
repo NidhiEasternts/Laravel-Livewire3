@@ -1,4 +1,4 @@
-<form>
+<form wire:submit.prevent="productStore">
     <div class="form-group mb-3">
         <label for="productName">Product Name:</label>
         <input type="text" class="form-control @error('product_name') is-invalid @enderror" id="productName" placeholder="Enter Product Name" wire:model="product_name">
@@ -6,7 +6,7 @@
     </div>
     <div class="form-group mb-3">
         <label for="category">Category:</label>
-        <select class="form-control" id="select2" name="category_id" wire:model="selected">
+        <select class="form-control" id="select2" name="category_id" wire:model.live="selected">
         <option value="">Select Category</option>
         @foreach($category as $value)
             <option value="{{$value->id}}">{{$value->name}}</option>
@@ -25,9 +25,20 @@
         <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" wire:model="images" multiple>
         @error('images.*') <span class="text-danger">{{ $message }}</span>@enderror
     </div>
-    <div class="d-grid gap-2">
-        <button wire:click.prevent="productStore()" class="btn btn-success btn-block">Create Save</button>
+     <!-- Show loader when uploading or processing the images -->
+    <div wire:loading wire:target="images" class="text-center mb-3">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Processing...</span>
+        </div>
+        <p>Loading images...</p>
     </div>
+    <div class="d-grid gap-2">
+    {{-- <button class="btn btn-success btn-block" wire:loading.attr="disabled">
+        <span wire:loading.remove>Save</span>
+        <span wire:loading>Saving...</span>
+    </button> --}}
+    <button type="submit" class="btn btn-success">Save Product</button>
+</div>
 </form>
 
 

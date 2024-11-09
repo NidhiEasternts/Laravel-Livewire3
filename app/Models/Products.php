@@ -14,6 +14,10 @@ class Products extends Model
 
     public $timestamps = true;
     
+    public function productImages(){
+        return $this->hasMany(ProductImage::class,'product_id','id');
+    }
+
     public function product_images(){
         return $this->hasMany(ProductImage::class,'product_id','id');
     }
